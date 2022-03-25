@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct workoutApp: App {
+    
+    @StateObject private var data = DataManager()
+    
     var body: some Scene {
         WindowGroup {
-            MainView()
+            MainView().environmentObject(data)
+                
         }
     }
 }
