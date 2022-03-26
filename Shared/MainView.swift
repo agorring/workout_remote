@@ -38,7 +38,7 @@ struct MainView: View
                     //A HStack is a view that arranges its contents into a vertical line.
                     HStack
                     {
-                        Text("View Exercises").fontWeight(.semibold).font(.title)
+                        Text("View Workouts").fontWeight(.semibold).font(.title)
                         //The SF Symbols extension provides common iOS symbols, such as "list.bullet".
                         Image(systemName: "list.bullet").font(.title)
                     }
@@ -49,7 +49,6 @@ struct MainView: View
                     .cornerRadius(30)
                     }
                     //Applying a navigationBarTitle ensures that the user knows where they are located in the app.
-                    .navigationBarTitle("Home", displayMode: .inline)
                 
                 //The content within this NavigationLink initiates a travel to the viewScores view when clicked.
                 NavigationLink(destination: WorkoutView())
@@ -60,7 +59,6 @@ struct MainView: View
                         Image(systemName: "timer").font(.title)
                     }.padding(.horizontal, 60).padding(.vertical, 20).background(darkBlue).foregroundColor(.white).cornerRadius(30)
                 }
-                .navigationBarTitle("Home", displayMode: .inline)
 
                 Spacer()
             }

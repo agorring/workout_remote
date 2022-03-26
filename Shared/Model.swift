@@ -9,49 +9,16 @@ import SwiftUI
 import Foundation
 import Combine
 
-//MARK: User
-
-//Conforming to Codable allows the data type to be compatible with JSON data. Conforming to Identifiable allows Student data types to have a stable identity. Conforming to Equatable allows Student data types to be compared using the == operator.
-class User: Codable, Identifiable, Equatable
-{
-    var userID : Int
-    var firstName: String
-    var surname: String
-    var yearOfBirth : Int
-    var gender : String
-    var fullName : String
-    {
-        return firstName + " " + surname
-    }
-    
-    //An initial declaration must be made for the User type.
-    init(studentID: Int, firstName: String, surname: String, yearOfBirth : Int, gender : String, house : String)
-    {
-        self.userID = studentID
-        self.firstName = firstName
-        self.surname = surname
-        self.yearOfBirth = yearOfBirth
-        self.gender = gender
-    }
-
-    //This must be included for the data type to conform to equatable.
-    static func == (lhs: User, rhs: User) -> Bool
-    {
-        return lhs.userID == rhs.userID
-    }
-}
 //MARK: Workout
 class Workout : Codable, Identifiable, Equatable
 {
     var workoutID : Int
     var workoutName : String
-    var date : String
 
-    init(workoutID: Int, workoutName: String, date : String)
+    init(workoutID: Int, workoutName: String)
         {
             self.workoutID = workoutID
             self.workoutName = workoutName
-            self.date = date
         }
 
     static func == (lhs: Workout, rhs: Workout) -> Bool
@@ -83,20 +50,26 @@ class Exercise : Codable, Identifiable, Equatable
 //MARK: Result
 class Result : Codable, Identifiable, Equatable
 {
-    var userID : Int
     var exerciseID : Int
-    var result : Double
+    var workoutID: Int
+    var date: String
+    var weight : Int
+    var reps: Int
+
     
     static func == (lhs: Result, rhs: Result) -> Bool
     {
-        return lhs.userID == rhs.userID
+        return lhs.exerciseID == rhs.exerciseID
     }
     
-    init(userID: Int, exerciseID: Int, result: Double)
+    init(exerciseID: Int, workoutID: Int, date: String, weight: Int, reps: Int)
     {
-        self.userID = userID
         self.exerciseID = exerciseID
-        self.result = result
+        self.workoutID = workoutID
+        self.date = date
+        self.weight = weight
+        self.reps = reps
+
     }
 }
 
@@ -108,7 +81,7 @@ class DataManager: ObservableObject
         getOnlineData()
     }
     
-    let getRequests = ["U", "W", "E", "R"]
+    let getRequests = ["W", "E", "R"]
     
     //A predefined SwiftUI variable that sends data to the view when the object is modified
     var willChange = PassthroughSubject<Void, Never>()
@@ -126,7 +99,6 @@ class DataManager: ObservableObject
     //Arrays are created to store downloaded data. Each are arrays of their implied data type.
     @Published var workouts = [Workout]()
     @Published var results = [Result]()
-    @Published var users = [User]()
     @Published var exercises = [Exercise]()
     
     //recordsInserted and recordsUpdated are declared as zero and are used to count records.
@@ -212,15 +184,7 @@ class DataManager: ObservableObject
     func parseJson(_ data: Data, request: String)
     {
         do {
-            if request == "U"
-            {
-                //Take the downloaded data and match the index of the dictionary with the property name in the object
-                let downloadedData = try JSONDecoder().decode([User].self, from: data)
-                
-                //Save the users array as the downloaded students
-                DispatchQueue.main.async {self.users = downloadedData}
-            }
-            else if request == "W"
+            if request == "W"
             {
                 let downloadedData = try JSONDecoder().decode([Workout].self, from: data)
                 DispatchQueue.main.async {self.workouts = downloadedData}

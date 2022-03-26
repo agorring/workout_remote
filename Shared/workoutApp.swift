@@ -14,7 +14,7 @@ struct workoutApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainView().environmentObject(data)
+            WorkoutView().environmentObject(data)
                 
         }
     }
