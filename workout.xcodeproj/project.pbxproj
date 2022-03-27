@@ -13,8 +13,6 @@
 		67D1E3BF27E75EFE00F01FBF /* Tests_macOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D1E3BE27E75EFE00F01FBF /* Tests_macOSLaunchTests.swift */; };
 		67D1E3C027E75EFE00F01FBF /* workoutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D1E39827E75EFC00F01FBF /* workoutApp.swift */; };
 		67D1E3C127E75EFE00F01FBF /* workoutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D1E39827E75EFC00F01FBF /* workoutApp.swift */; };
-		67D1E3C227E75EFE00F01FBF /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D1E39927E75EFC00F01FBF /* MainView.swift */; };
-		67D1E3C327E75EFE00F01FBF /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D1E39927E75EFC00F01FBF /* MainView.swift */; };
 		67D1E3C427E75EFE00F01FBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67D1E39A27E75EFE00F01FBF /* Assets.xcassets */; };
 		67D1E3C527E75EFE00F01FBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67D1E39A27E75EFE00F01FBF /* Assets.xcassets */; };
 		67D1E3D827E8533B00F01FBF /* WorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D1E3D727E8533B00F01FBF /* WorkoutView.swift */; };
@@ -44,7 +42,6 @@
 
 /* Begin PBXFileReference section */
 		67D1E39827E75EFC00F01FBF /* workoutApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workoutApp.swift; sourceTree = "<group>"; };
-		67D1E39927E75EFC00F01FBF /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		67D1E39A27E75EFE00F01FBF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		67D1E39F27E75EFE00F01FBF /* workout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = workout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67D1E3A527E75EFE00F01FBF /* workout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = workout.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,7 +106,6 @@
 				67D1E39827E75EFC00F01FBF /* workoutApp.swift */,
 				67D1E3D727E8533B00F01FBF /* WorkoutView.swift */,
 				67D1E42527EE90D300F01FBF /* ExerciseView.swift */,
-				67D1E39927E75EFC00F01FBF /* MainView.swift */,
 				67D1E3DD27E853B200F01FBF /* Model.swift */,
 				67D1E39A27E75EFE00F01FBF /* Assets.xcassets */,
 			);
@@ -312,7 +308,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				67D1E3D827E8533B00F01FBF /* WorkoutView.swift in Sources */,
-				67D1E3C227E75EFE00F01FBF /* MainView.swift in Sources */,
 				67D1E3DE27E853B200F01FBF /* Model.swift in Sources */,
 				67D1E3C027E75EFE00F01FBF /* workoutApp.swift in Sources */,
 				67D1E42627EE90D300F01FBF /* ExerciseView.swift in Sources */,
@@ -324,7 +319,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				67D1E3D927E8533B00F01FBF /* WorkoutView.swift in Sources */,
-				67D1E3C327E75EFE00F01FBF /* MainView.swift in Sources */,
 				67D1E3DF27E853B200F01FBF /* Model.swift in Sources */,
 				67D1E3C127E75EFE00F01FBF /* workoutApp.swift in Sources */,
 				67D1E42727EE90D300F01FBF /* ExerciseView.swift in Sources */,

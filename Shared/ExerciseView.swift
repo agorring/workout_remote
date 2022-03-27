@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct ExerciseView: View {
+    var exercise: Exercise
+    @EnvironmentObject var data : DataManager
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+        Text("Hello, World!")
+        }.navigationTitle(exercise.exerciseName)
     }
 }
 
-struct ExerciseView_Previews: PreviewProvider {
-    static var previews: some View {
-        ExerciseView()
-    }
-}
+//struct ExerciseView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ExerciseView()
+//    }
+//}

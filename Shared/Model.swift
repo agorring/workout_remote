@@ -204,6 +204,23 @@ class DataManager: ObservableObject
             print(error)
         }
     }
+    
+    @Published var currentExercise = Exercise(exerciseID: -1, exerciseName: "Whatever", maxResult: 10, workoutID: -1)
+//    {
+//        didSet
+//        {
+//            currentResults.removeAll()
+//            setupResults()
+//        }
+//    }
+    
+//    @Published var currentResults = [Result]()
+//    //currentStudents is an array of Student. It returns a filtered list of all students who have the currentEvent ageGroup and gender.
+//    var currentStudents : [Student]
+//    {
+//        return students.filter({$0.ageGroup == currentEvent.ageGroup && $0.gender == currentEvent.gender})
+//    }
+    
 }
 
 //MARK: Extension twoDP
