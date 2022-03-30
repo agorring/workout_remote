@@ -33,18 +33,22 @@ class Exercise : Codable, Identifiable, Equatable
     var exerciseName : String
     var maxResult : Double
     var workoutID : Int
+    var weight: Int
+    var reps: Int
     
     static func == (lhs: Exercise, rhs: Exercise) -> Bool
     {
         return lhs.exerciseID == rhs.exerciseID
     }
     
-    init(exerciseID: Int, exerciseName: String, maxResult: Double, workoutID: Int)
+    init(exerciseID: Int, exerciseName: String, maxResult: Double, workoutID: Int, weight: Int, reps: Int)
     {
         self.exerciseID = exerciseID
         self.exerciseName = exerciseName
         self.maxResult = maxResult
         self.workoutID = workoutID
+        self.weight = weight
+        self.reps = reps
     }
 }
 //MARK: Result
@@ -145,11 +149,41 @@ class DataManager: ObservableObject
         }
     }
     
-    //MARK: Send Data
-    func sendData(_ results: [Result])
+    //MARK: Send Workout
+    func sendWorkout(_ workout: Workout)
     {
-        for result in results
-        {
+            var request = URLRequest(url: URL(string: jsonURL)!)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            guard let uploadData = try? JSONEncoder().encode(workout) else { return }
+
+            let task = URLSession.shared.uploadTask(with: request, from: uploadData)
+            {
+                data, response, error in
+
+                if let error = error
+                {
+                    print ("error: \(error)")
+                    return
+                }
+                guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else
+                {
+                    print ("server error")
+                    return
+                }
+                if let data = data, let dataString = String(data: data, encoding: .utf8)
+                {
+                    print("got data: \(dataString)")
+                    self.recordsInserted += 1
+                }
+            }
+            task.resume()
+        }
+    
+    //MARK: Send Result
+    func sendResult(_ result: Result)
+    {
             var request = URLRequest(url: URL(string: jsonURL)!)
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -178,7 +212,7 @@ class DataManager: ObservableObject
             }
             task.resume()
         }
-    }
+    
     
     //MARK: Parse JSON
     func parseJson(_ data: Data, request: String)
@@ -205,7 +239,7 @@ class DataManager: ObservableObject
         }
     }
     
-    @Published var currentExercise = Exercise(exerciseID: -1, exerciseName: "Whatever", maxResult: 10, workoutID: -1)
+    @Published var currentExercise = Exercise(exerciseID: -1, exerciseName: "Whatever", maxResult: 10, workoutID: -1, weight: -1, reps: -1)
 //    {
 //        didSet
 //        {

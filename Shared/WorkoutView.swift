@@ -34,6 +34,13 @@ struct WorkoutView: View {
                 //A list displays its contents in a default iOS list.
                 List
                 {
+                    
+                    NavigationLink(destination: NewExercise())
+                    {
+                        Text("New Exercise")
+                        Image(systemName: "plus.circle").font(.title).foregroundColor(.blue)
+                    }
+                    
                     //For each exercise in exerciseList, the title of the exercise is displayed, and pressing on it will travel to the exercise view
                     ForEach(exerciseList, id: \.exerciseID)
                     {
@@ -42,6 +49,9 @@ struct WorkoutView: View {
                         NavigationLink(destination: ExerciseView(exercise: exercise))
                         {
                             Text(exercise.exerciseName)
+                            Text(String(exercise.weight) + "kg")
+                            Image(systemName: "multiply").foregroundColor(.blue)
+                            Text(String(exercise.reps))
                         }
                     }
                 }
@@ -72,7 +82,7 @@ struct WorkoutView: View {
     
     var addWorkout: some View {
         VStack {
-            NavigationLink(destination: WorkoutView())
+            NavigationLink(destination: NewWorkout())
             {
                 Image(systemName: "plus.app.fill").font(.title).foregroundColor(.blue)
             }
