@@ -31,7 +31,6 @@ class Exercise : Codable, Identifiable, Equatable
 {
     var exerciseID : Int
     var exerciseName : String
-    var maxResult : Double
     var workoutID : Int
     var weight: Int
     var reps: Int
@@ -41,11 +40,10 @@ class Exercise : Codable, Identifiable, Equatable
         return lhs.exerciseID == rhs.exerciseID
     }
     
-    init(exerciseID: Int, exerciseName: String, maxResult: Double, workoutID: Int, weight: Int, reps: Int)
+    init(exerciseID: Int, exerciseName: String, workoutID: Int, weight: Int, reps: Int)
     {
         self.exerciseID = exerciseID
         self.exerciseName = exerciseName
-        self.maxResult = maxResult
         self.workoutID = workoutID
         self.weight = weight
         self.reps = reps
@@ -239,21 +237,7 @@ class DataManager: ObservableObject
         }
     }
     
-    @Published var currentExercise = Exercise(exerciseID: -1, exerciseName: "Whatever", maxResult: 10, workoutID: -1, weight: -1, reps: -1)
-//    {
-//        didSet
-//        {
-//            currentResults.removeAll()
-//            setupResults()
-//        }
-//    }
-    
-//    @Published var currentResults = [Result]()
-//    //currentStudents is an array of Student. It returns a filtered list of all students who have the currentEvent ageGroup and gender.
-//    var currentStudents : [Student]
-//    {
-//        return students.filter({$0.ageGroup == currentEvent.ageGroup && $0.gender == currentEvent.gender})
-//    }
+    @Published var currentExercise = Exercise(exerciseID: -1, exerciseName: "Whatever", workoutID: -1, weight: -1, reps: -1)
     
 }
 
