@@ -11,6 +11,8 @@ struct NewExercise: View {
     
     @EnvironmentObject var data : DataManager
     
+    var selectedWorkoutID : Int
+    
     var newExercise : Exercise = Exercise(exerciseID: -1, exerciseName: "", workoutID: -1, weight: -1, reps: -1)
     
     @State private var showingAlert = false
@@ -19,29 +21,10 @@ struct NewExercise: View {
     @State var reps = 0
     @State var name = ""
     
-    @State var selectedWorkoutID : Int = 1
-    
     var body: some View {
         List
         {
-            
             TextField("Name", text: $name)
-            
-            HStack
-            {
-                Picker(selection: $selectedWorkoutID, label: Text("Workout"))
-                {
-                    ForEach(data.workouts, id: \.workoutID)
-                    {
-                        workout in
-                        
-                        Text(workout.workoutName)
-                            .tag(workout.workoutID)
-                    }
-                }
-                Spacer()
-            }
-            
             
             Picker("Weight", selection: $weight) {
                 ForEach(1 ..< 100) {
@@ -58,18 +41,16 @@ struct NewExercise: View {
             
             Button(action:
                     {
-
-                
                 //Set the fields of the new record
-//                newResult.date = dateFormatter.string(from: date)
-//                newResult.workoutID = exercise.workoutID
-//                newResult.exerciseID = exercise.exerciseID
                 //Add one to the weight/reps because the picker values begin at 0
                 newExercise.weight = weight + 1
                 newExercise.reps = reps + 1
+                newExercise.exerciseName = name
+                newExercise.workoutID = selectedWorkoutID
                 
                 //Send data
-                //data.sendExercise(newExercise)
+                data.sendExercise(newExercise)
+
                 
                 //Show the alert
                 showingAlert = true
@@ -86,11 +67,5 @@ struct NewExercise: View {
                     }
             }
         }.navigationTitle("New Exercise")
-    }
-}
-
-struct NewExercise_Previews: PreviewProvider {
-    static var previews: some View {
-        NewExercise()
     }
 }

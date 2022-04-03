@@ -35,7 +35,7 @@ struct WorkoutView: View {
                 List
                 {
                     
-                    NavigationLink(destination: NewExercise())
+                    NavigationLink(destination: NewExercise(selectedWorkoutID: selectedWorkoutID))
                     {
                         Text("New Exercise")
                         Image(systemName: "plus.circle").font(.title).foregroundColor(.blue)

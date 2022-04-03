@@ -179,6 +179,39 @@ class DataManager: ObservableObject
             task.resume()
         }
     
+    //MARK: Send Exercise
+    func sendExercise(_ exercise: Exercise)
+    {
+            var request = URLRequest(url: URL(string: jsonURL)!)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            guard let uploadData = try? JSONEncoder().encode(exercise) else { return }
+
+            let task = URLSession.shared.uploadTask(with: request, from: uploadData)
+            {
+                data, response, error in
+
+                if let error = error
+                {
+                    print ("error: \(error)")
+                    return
+                }
+                guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else
+                {
+                    print ("server error")
+                    return
+                }
+                if let data = data, let dataString = String(data: data, encoding: .utf8)
+                {
+                    print("got data: \(dataString)")
+                    self.recordsInserted += 1
+                }
+            }
+            task.resume()
+        }
+    
+    
     //MARK: Send Result
     func sendResult(_ result: Result)
     {
@@ -210,7 +243,7 @@ class DataManager: ObservableObject
             }
             task.resume()
         }
-    
+       
     
     //MARK: Parse JSON
     func parseJson(_ data: Data, request: String)
