@@ -1,5 +1,7 @@
 # workout_remote
 
+Watch a demonstration at https://youtu.be/9EmOkVlOPPc
+
 The Workout app is developed in Swift, accompanied by an SQL database and a PHP API.
 
 I developed the app because it is difficult to track workout progression. Using the app, I can conveniently track any aspect of my workouts.
