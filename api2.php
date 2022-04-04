@@ -62,6 +62,27 @@ if(!empty($data))
             print($queryResults);
         }
     }
+    
+    //If data contains an exerciseName, it must be a new exercise being sent
+    if (isset($data['exerciseName'])) {
+        $exerciseName = mysqli_real_escape_string($dbConnection, $data['exerciseName']);
+        $workoutID = mysqli_real_escape_string($dbConnection, $data['workoutID']);
+        $weight = mysqli_real_escape_string($dbConnection, $data['weight']);
+        $reps = mysqli_real_escape_string($dbConnection, $data['reps']);
+
+        //If the workoutID is less than 0 then the record is not valid
+        if ($workoutID > 0) {
+        
+            $query = "INSERT INTO `exercises`(`exerciseName`, `workoutID`, `weight`, `reps`)
+                        VALUES ('$exerciseName', '$workoutID', '$weight', '$reps')";
+
+            print($query);
+
+            $queryResults = $dbConnection->query($query);
+
+            print($queryResults);
+        }
+    }
 
 
 }
@@ -91,7 +112,7 @@ if(!empty($requestedData))
     }
     else if($requestedData == "E")
     {
-        $searchQuery = "SELECT `exerciseID`, `exerciseName`, `maxResult`, `workoutID`, `weight`, `reps` FROM `exercises`";
+        $searchQuery = "SELECT `exerciseID`, `exerciseName`, `workoutID`, `weight`, `reps` FROM `exercises`";
 
         $searchResults = $dbConnection -> query($searchQuery);
 
@@ -99,7 +120,7 @@ if(!empty($requestedData))
 
         while($rowResult = $searchResults -> fetch_assoc())
         {
-            $resultsFound[] = array("exerciseID" => intval($rowResult['exerciseID']),  "exerciseName" => $rowResult['exerciseName'], "maxResult" => doubleval($rowResult['maxResult']), "workoutID" => intval($rowResult['workoutID']), "weight" => intval($rowResult['weight']), "reps" => intval($rowResult['reps']));
+            $resultsFound[] = array("exerciseID" => intval($rowResult['exerciseID']),  "exerciseName" => $rowResult['exerciseName'], "workoutID" => intval($rowResult['workoutID']), "weight" => intval($rowResult['weight']), "reps" => intval($rowResult['reps']));
         }
 
         $returnData = json_encode($resultsFound);
@@ -128,3 +149,4 @@ if(!empty($requestedData))
     
 }
 ?>
+
